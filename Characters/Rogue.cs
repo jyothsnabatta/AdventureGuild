@@ -38,10 +38,11 @@ namespace AdventureGuild.Characters
             if (roll <= criticalChance * 100)
             {
                 damage *= 2; // Critical hit doubles the damage
-                Console.WriteLine($"{Name} lands a critical hit!");
+                Console.WriteLine($"{Name} gets a critical hit!");
             }
 
-            Console.WriteLine($"{Name} attacks quickly for {damage} damage!");
+            Console.WriteLine($"{Name} attacks quickly with a dagger!");
+            Console.WriteLine($"Damage: {damage}");
 
             target.TakeDamage(damage);
         }

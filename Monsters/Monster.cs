@@ -68,8 +68,8 @@ namespace AdventureGuild.Monsters
             {
                 currentHealth = 0; // Ensure health doesn't go below zero
             }
-
-            Console.WriteLine($"{name} takes {amount} damage and has {currentHealth}/{maxHealth} health remaining.");
+            Console.WriteLine($"{name} takes {amount} damage.");
+            Console.WriteLine($"Health: {currentHealth}/{maxHealth}");
         }
 
         public void Attack(Character target)
@@ -78,8 +78,9 @@ namespace AdventureGuild.Monsters
             {
                 throw new ArgumentNullException(nameof(target));
             }
-            Console.WriteLine($"{name} attacks {target.Name} for {attackPower} damage!");
-            
+            Console.WriteLine($"{name} attacks!");
+            Console.WriteLine($"Damage: {attackPower}");
+
             target.TakeDamage(attackPower);
         }
     }

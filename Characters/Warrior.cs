@@ -30,7 +30,9 @@ namespace AdventureGuild.Characters
 
             int damage = weaponDamage;
 
-            Console.WriteLine($"{Name} attacks with a sword for {damage} damage!");
+           
+            Console.WriteLine($"{Name} attacks with a sword!");
+            Console.WriteLine($"Damage: {damage}");
 
             target.TakeDamage(damage);
         }
@@ -44,7 +46,7 @@ namespace AdventureGuild.Characters
                     reducedDamage = 0;
             }
             
-            Console.WriteLine($"{Name}'s armor reduces damage from" + $"{amount} to {reducedDamage}");
+            Console.WriteLine($"{Name}'s armor reduces damage from" + $" {amount} to {reducedDamage}");
 
             base.TakeDamage(reducedDamage);
         }

@@ -39,7 +39,8 @@ namespace AdventureGuild.Characters
 
             int damage = 8;
 
-            Console.WriteLine($"{Name} attacks with a staff for {damage} damage!");
+            Console.WriteLine($"{Name} attacks with a staff!");
+            Console.WriteLine($"Damage: {damage}");
 
             target.TakeDamage(damage);
         }
@@ -60,7 +61,8 @@ namespace AdventureGuild.Characters
 
             mana -= spellCost;
 
-            Console.WriteLine($"{Name} casts fireball for {spellDamage} damage!");
+            Console.WriteLine($"{Name} casts Fireball!");
+            Console.WriteLine($"Damage: {spellDamage}");
 
             target.TakeDamage(spellDamage);
 
