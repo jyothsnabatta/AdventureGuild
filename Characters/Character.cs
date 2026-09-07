@@ -5,24 +5,27 @@ using AdventureGuild.Interfaces;
 
 namespace AdventureGuild.Characters
 {
-    public abstract class Character : IDamageable
+    public abstract class Character : IDamageable  // Implements IDamageable so every character can take damage.
     {
-        // Properties with private setters to ensure encapsulation
+        // public Properties with private setters to ensure encapsulation
         // Other classes can read them but cannot modify them directly
+        // can change them, which helps maintain encapsulation.
         public string Name { get;  private set; }
         public int MaxHealth { get; private set; }
         public int CurrentHealth { get;  private set; }
         public int Level { get; private set; }
 
-        // Each character owns an inventory of items.
+        // Stores the items currently owned by the character.
         public List<Item> Inventory { get; private set; }
 
+        // Stores equipped items by their equipment slot.
         private Dictionary<string, Item> equippedItems;
 
-        // Protected Constructor
+        // Protected Constructor because character is abstract.
         // only charcater and derived classes can call this constructor.
         protected Character(string name, int maxHealth, int level)
         {
+            //Validating the character's basic information before creation
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Name cannot be null or whitespace.", nameof(name));
@@ -43,8 +46,8 @@ namespace AdventureGuild.Characters
 
             Inventory = new List<Item>();
         }
-        // Check if character is defeated
-        // returns true if CurrentHealth is 0 or less, otherwise false
+        // Determines whether the character has been defeated.
+        // A character is defeated when its health reaches zero.
         public bool IsDefeated
         {
             get 
@@ -54,7 +57,7 @@ namespace AdventureGuild.Characters
             }
         }
 
-        // Add an item to inventory
+        // Adds an item to the character's inventory.
         public void AddItem(Item item)
         {
             if (item == null)
@@ -64,7 +67,7 @@ namespace AdventureGuild.Characters
             Inventory.Add(item);
           }
 
-        // Remove an item from inventory
+        // Removes an item from the character's inventory.
         public void RemoveItem(Item item)
         {
             if (item == null)
@@ -74,12 +77,14 @@ namespace AdventureGuild.Characters
             Inventory.Remove(item);
         }
 
-        // Returns a copy of the inventory list to prevent external modification
+        // Returns a copy of the inventory so external code
+        // cannot directly modify the original list.
         public List<Item> GetInventory()
         {
             return new List<Item>(Inventory);
         }
 
+        // Equips an item in the specified equipment slot.
         public void EquipItem(string slot, Item item)
         {
             if (item == null) 
@@ -89,6 +94,9 @@ namespace AdventureGuild.Characters
 
             equippedItems[slot] = item;
         }
+
+        // Returns the item equipped in the specified slot.
+        // Returns null if the slot is empty.
         public Item GetEqippedItem(string slot)
         {
             if (equippedItems.ContainsKey(slot))
@@ -98,7 +106,8 @@ namespace AdventureGuild.Characters
             return null;
         }
 
-        // Take damage
+        // Reduces the character's health by the specified damage amount.
+        // Health is prevented from falling below zero.
         public virtual void TakeDamage(int amount)
         {
             if (amount < 0)
@@ -114,7 +123,8 @@ namespace AdventureGuild.Characters
             Console.WriteLine($"{Name} takes {amount} damage. Health: {CurrentHealth}/{MaxHealth}");
         }
 
-        // Heal the character
+        // Restores the character's health.
+        // Health cannot exceed the character's maximum health.
         public virtual void Heal(int amount)
         {
             if (amount < 0)
@@ -129,7 +139,8 @@ namespace AdventureGuild.Characters
             }
             Console.WriteLine($"{Name} heals {amount} health. Health: {CurrentHealth}/{MaxHealth}");
         }
-        // Every character must have its own attack
+        // Each character type must provide its own attack implementation.
+        // This is abstract because different character classes attack differently.
         public abstract void Attack(IDamageable target);
     }
 }

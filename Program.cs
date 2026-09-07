@@ -8,17 +8,24 @@ using System;
 
 namespace AdventureGuild
 {
+
+    // Entry point of the Adventure Guild application.
+    // Handles the main menu and connects the different game components.
     internal class Program
     {
         static void Main(string[] args)
         {
+            // Creates the dice roller used by the game.
             RandomDiceRoller diceRoller = new RandomDiceRoller();
 
+            // Creates the party that will contain the player's characters.
             AdventureGuild.Party.Party party =
                 new AdventureGuild.Party.Party();
 
             bool running = true;
 
+
+            // Keeps the game running until the player chooses to exit.
             while (running)
             {
                 Console.Clear();
@@ -40,6 +47,8 @@ namespace AdventureGuild
                 Console.Write("Choose an option: ");
                 string choice = Console.ReadLine();
 
+
+                // Uses the user's choice to call the corresponding game operation.
                 switch (choice)
                 {
                     case "1":
@@ -77,6 +86,8 @@ namespace AdventureGuild
             }
         }
 
+        // Creates the player's characters and their starting equipment.
+
         static void CreateCharacters(
             AdventureGuild.Party.Party party)
         {
@@ -87,6 +98,8 @@ namespace AdventureGuild
             Console.WriteLine("===========================");
             Console.WriteLine();
 
+
+            // Prevents characters from being created more than once.
             if (party.Characters.Count > 0)
             {
                 Console.WriteLine("Characters have already been created.");
@@ -94,7 +107,8 @@ namespace AdventureGuild
                 return;
             }
 
-            // Create characters
+            // Create characters.
+            // Each class has its own specialized behavior.
             Warrior warrior =
                 new Warrior("Aragorn", 5, 100);
 
@@ -120,7 +134,7 @@ namespace AdventureGuild
             Weapon dagger =
                 new Weapon("Dagger", 35, 12);
 
-            // Add items to inventory
+            // Add the starting equipment to each character's inventory.
             warrior.AddItem(sword);
             warrior.AddItem(shield);
 
@@ -129,7 +143,7 @@ namespace AdventureGuild
 
             rogue.AddItem(dagger);
 
-            // Add characters to party
+            // Add the characters to the party.
             party.AddCharacter(warrior);
             party.AddCharacter(wizard);
             party.AddCharacter(rogue);
@@ -143,7 +157,7 @@ namespace AdventureGuild
 
             Pause();
         }
-
+        // Displays all characters currently in the party.
         static void ViewParty(
             AdventureGuild.Party.Party party)
         {
@@ -161,6 +175,9 @@ namespace AdventureGuild
                 return;
             }
 
+
+            // Character is the base type, so this works with
+            // Warrior, Wizard, Rogue, and other derived character types.
             foreach (Character character in party.Characters)
             {
                 Console.WriteLine(
@@ -171,6 +188,7 @@ namespace AdventureGuild
             Pause();
         }
 
+        // Displays the items owned by each character.
         static void ViewInventory(
             AdventureGuild.Party.Party party)
         {
@@ -202,6 +220,9 @@ namespace AdventureGuild
                     {
                         Console.WriteLine($"  - {item.Name}");
 
+
+                        // Pattern matching identifies the specific item type
+                        // and displays its type-specific information.
                         if (item is Weapon weapon)
                         {
                             Console.WriteLine("    Type: Weapon");
@@ -224,7 +245,7 @@ namespace AdventureGuild
 
             Pause();
         }
-
+        // Creates the enemy and starts a new battle.
         static void StartBattle(
             AdventureGuild.Party.Party party,
             RandomDiceRoller diceRoller)
@@ -237,10 +258,11 @@ namespace AdventureGuild
                 Pause();
                 return;
             }
-
+            // Creates the enemy used in the battle.
             Monster monster =
                 new Monster("Goblin King", 150, 12);
-
+            // The Battle class handles the actual battle logic.
+            // The party, monster, and dice roller are passed as dependencies.
             AdventureGuild.Battle.Battle battle =
                 new AdventureGuild.Battle.Battle(
                     party,
@@ -252,6 +274,7 @@ namespace AdventureGuild
             Pause();
         }
 
+        // Displays general information about the game.
         static void ShowGameInformation()
         {
             Console.Clear();
@@ -287,6 +310,7 @@ namespace AdventureGuild
             Pause();
         }
 
+        // Waits for the user before returning to the main menu.
         static void Pause()
         {
             Console.WriteLine();
