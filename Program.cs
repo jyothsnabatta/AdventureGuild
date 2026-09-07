@@ -231,8 +231,8 @@ namespace AdventureGuild
                 Pause();
             }
 
-            // PAUSE
-            static void Pause() 
+        // PAUSE CREATE A PAUSE FUNCTION TO WAIT FOR USER INPUT BEFORE CONTINUING
+        static void Pause() 
             { 
                 Console.WriteLine();
                 Console.WriteLine("Press ENTER to continue..."); 
