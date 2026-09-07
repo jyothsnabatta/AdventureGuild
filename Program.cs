@@ -90,7 +90,24 @@ namespace AdventureGuild
             Wizard wizard = new Wizard("Gandalf", 5, 80);
             Rogue rogue = new Rogue("Robin", 5, 90);
 
-            
+            // Create items
+            Weapon sword = new Weapon("Sword", 50, 15);
+            Armor shield = new Armor("Shield", 40, 5);
+
+            Weapon magicStaff = new Weapon("Magic Staff", 60, 10);
+            Potion healthPotion = new Potion("Health Potion", 20, 30);
+            Weapon dagger = new Weapon("Dagger", 35, 12);
+
+            // Add items to characters
+            warrior.AddItem(sword);
+            warrior.AddItem(shield);
+
+            wizard.AddItem(magicStaff);
+            wizard.AddItem(healthPotion);
+
+            rogue.AddItem(dagger);
+
+
             // Add characters to the party
             party.AddCharacter(warrior);
             party.AddCharacter(wizard);
@@ -100,7 +117,7 @@ namespace AdventureGuild
             Console.WriteLine("Characters created!");
             Console.WriteLine();
 
-            Console.WriteLine("Warrior: Aragon");
+            Console.WriteLine("Warrior: Aragorn");
             Console.WriteLine("Wizard: Gandalf");
             Console.WriteLine("Rogue: Robin");
 

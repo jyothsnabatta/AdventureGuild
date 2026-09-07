@@ -19,8 +19,6 @@ namespace AdventureGuild.Party
                 throw new ArgumentNullException(nameof(character), "Character cannot be null.");
             }
             characters.Add(character);
-
-            Console.WriteLine($"Character {character.Name} joined the party.");
         }
         public void RemoveCharacter(Character character)
         {

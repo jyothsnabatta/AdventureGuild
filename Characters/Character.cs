@@ -62,8 +62,7 @@ namespace AdventureGuild.Characters
                 throw new ArgumentNullException(nameof(item), "Item cannot be null.");
             }
             Inventory.Add(item);
-            Console.WriteLine($"{Name} picked up {item.Name}.");
-        }
+          }
 
         // Remove an item from inventory
         public void RemoveItem(Item item)
